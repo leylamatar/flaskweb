@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for,Response
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -64,3 +64,9 @@ def sign_up():
 
     return render_template("sign_up.html", user=current_user)
   #password için hash code kullanıldı
+
+@auth.route('/')
+def index():
+    return render_template('home.html')
+
+

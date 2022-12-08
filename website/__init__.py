@@ -1,9 +1,15 @@
-from flask import Flask
+import cv2
+import os
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from datetime import date
 from datetime import datetime
+from flask import Flask,request,render_template,Response
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+import pandas as pd
+import joblib
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -44,6 +50,16 @@ def datetoday():
     return date.today().strftime("%m_%d_%y")
 def datetoday2():
     return date.today().strftime("%d-%B-%Y")
+
+#open cam
+# make training set 
+# save faces
+# face recognition
+#take atendance
+
+
+
+
 
 #veritabani yoksa oluştur 
 def create_database(app):
