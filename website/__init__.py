@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from datetime import date
-from datetime import datetime
+import datetime
 from flask import Flask,request,render_template,Response
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
@@ -52,6 +52,34 @@ def datetoday2():
     return date.today().strftime("%d-%B-%Y")
 
 #open cam
+face_detector = cv2.CascadeClassifier('static/haarcascade_frontalface_default.xml')
+cap = cv2.VideoCapture(0)
+
+#create attendance file
+if not os.path.isdir('Attendance'):
+    os.makedirs('Attendance')
+if not os.path.isdir('static/faces'):
+    os.makedirs('static/faces')
+if f'Attendance-{datetoday}.csv' not in os.listdir('Attendance'):
+    x = datetime.date.today()
+    with open(f'Attendance//Attendance_{x.day}-{x.month}-{x.year}.csv','w') as f:
+        f.write('Name,school ID,Time')
+
+
+# extract the face from an image to make a training set
+def extract_faces(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)     #make the face gray
+    face_points = face_detector.detectMultiScale(gray, 1.3, 5)
+    return face_points
+
+
+# Identify face using ML(machine learning) model 
+
+def identify_face(facearray):
+    model = joblib.load('static/face_recognition_model.pkl')
+    return model.predict(facearray)
+
+
 # make training set 
 # save faces
 # face recognition
