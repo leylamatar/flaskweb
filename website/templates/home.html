@@ -38,18 +38,23 @@ h1{
 
 </style>
 <h1>Face Recognition Based Attendance System</h1>
-<form action="">
+<form action='/add' method="POST" method="GET" enctype="multipart/form-data"> <!-- enctype metod postsa kullanılır,multipart:form ile bir dosya yüklicekse -->
 <h3>Add New Student</h3>
-  <label for="name">Student Name:</label><br>
-  <input type="text" id="name" name="name"><br>
-  <label for="studentId">Student ID:</label><br>
-  <input type="text" id="studentId" name="studentId"><br>
-  <button type="submit" value="Add Student" class='btn btn-primary'>Add Student </button>
+  <label for="newstudentname">Student Name:</label><br>
+  <input type="text" id="newstudentname" name='newstudentname' required><br>
+  <label for="newstudentid">Student ID:</label><br>
+  <input type="text" id="newstudentid" name="newstudentid" required><br>
+  <a href="/add">
+  <button type="submit" value="Add Student" class='btn btn-primary'>Add Student </button></a>
 </form>
 
-<button
-style="font-size: 24px;font-weight: bold;"
-type='submit' class='btn btn-primary'>Take Attendance</button>
 
+
+<a style="text-decoration: none;max-width: 300px;" href="/start" >
+    <button
+        style="font-size: 24px;font-weight: bold;border-radius: 10px;width:490px;padding: 10px;margin-top: 30px;margin-bottom: 30px;"
+        type='submit' class='btn btn-primary'>Take Attendance <i
+         class="material-icons">beenhere</i></button>
+</a>
 </html>
 {% endblock %}
